@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "236787423424",
+    "firebase_url": "https://quizzard-f5bac.firebaseio.com",
+    "project_id": "quizzard-f5bac",
+    "storage_bucket": "quizzard-f5bac.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:236787423424:android:5d7ca61e405f51e9",
+        "android_client_info": {
+          "package_name": "com.mmil.abhi.quizzard"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "236787423424-1av1b4cnih8jpgr7hkqg4ojqgepqbion.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mmil.abhi.quizzard",
+            "certificate_hash": "9e549df69849d4cbe21e1dd43825596e83574075"
+          }
+        },
+        {
+          "client_id": "236787423424-5hg5d618inkb6iq72t1ldm2ee1b7p4ct.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDLg15qx2owrCfIUfWy7ep5_pBQilk-QRI"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "236787423424-5hg5d618inkb6iq72t1ldm2ee1b7p4ct.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
