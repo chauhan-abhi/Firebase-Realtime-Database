@@ -1,6 +1,7 @@
 package com.mmil.abhi.quizzard;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -48,31 +49,28 @@ public class MainActivity extends AppCompatActivity {
         signIn(edtUserName.getText().toString(), edtPassword.getText().toString());
       }
     });
-
   }
 
   private void signIn(final String user, final String pwd) {
     users.addListenerForSingleValueEvent(new ValueEventListener() {
       @Override public void onDataChange(DataSnapshot dataSnapshot) {
-        if(dataSnapshot.child(user).exists()){
-          if(!user.isEmpty()){
+        if (dataSnapshot.child(user).exists()) {
+          if (!user.isEmpty()) {
             User login = dataSnapshot.child(user).getValue(User.class);
             if (login.getPassword().equals(pwd)) {
-              Toast.makeText(MainActivity.this, "Login successful !", Toast.LENGTH_SHORT).show();
-            }
-            else {
+              Intent intent = new Intent(MainActivity.this, HomeScreenActivity.class);
+              startActivity(intent);
+              finish();
+            } else {
               Toast.makeText(MainActivity.this, "Incorrect password", Toast.LENGTH_SHORT).show();
             }
+          } else {
+            Toast.makeText(MainActivity.this, "Please enter correct user name", Toast.LENGTH_SHORT)
+                .show();
           }
-          else {
-            Toast.makeText(MainActivity.this, "Please enter correct user name", Toast.LENGTH_SHORT).show();
-          }
-
-        }
-        else {
+        } else {
           Toast.makeText(MainActivity.this, "User does not exists !", Toast.LENGTH_SHORT).show();
         }
-
       }
 
       @Override public void onCancelled(DatabaseError databaseError) {
@@ -104,22 +102,19 @@ public class MainActivity extends AppCompatActivity {
 
     alertDialog.setPositiveButton("YES", new DialogInterface.OnClickListener() {
       @Override public void onClick(DialogInterface dialogInterface, int i) {
-        final User user = new User(edtNewUserName.getText().toString(),
-            edtNewEmail.getText().toString(),
-            edtNewPassword.getText().toString()
-            );
+        final User user =
+            new User(edtNewUserName.getText().toString(), edtNewEmail.getText().toString(),
+                edtNewPassword.getText().toString());
 
         users.addListenerForSingleValueEvent(new ValueEventListener() {
           @Override public void onDataChange(DataSnapshot dataSnapshot) {
             if (dataSnapshot.child(user.getUserName()).exists()) {
               Toast.makeText(MainActivity.this, "User already exists !", Toast.LENGTH_SHORT).show();
+            } else {
+              users.child(user.getUserName()).setValue(user);
+              Toast.makeText(MainActivity.this, "User registration success !", Toast.LENGTH_SHORT)
+                  .show();
             }
-            else {
-              users.child(user.getUserName())
-              .setValue(user);
-              Toast.makeText(MainActivity.this, "User registration success !", Toast.LENGTH_SHORT).show();
-            }
-
           }
 
           @Override public void onCancelled(DatabaseError databaseError) {
@@ -130,6 +125,5 @@ public class MainActivity extends AppCompatActivity {
       }
     });
     alertDialog.show();
-
   }
 }
